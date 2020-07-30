@@ -91,7 +91,7 @@ public class Alarm extends Activity {
 
 
         //start the playback of the media player.
-        //mp.start();
+        mp.start();
 
 
         //force the sound to be full volume.
@@ -191,9 +191,9 @@ public class Alarm extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        // if (mp != null)
-        //start playing the media player.
-        // mp.start();
+        if (mp != null)
+            //start playing the media player.
+            mp.start();
     }
 
     /**
