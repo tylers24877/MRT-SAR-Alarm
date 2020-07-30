@@ -61,7 +61,7 @@ public class SMSApp extends BroadcastReceiver {
                     //if true,
                     //create a notification alerting that the alarm has sounded.
                     if (checkStringArray(activation, message))
-                        ActivationNotification.notify(context, context.getString(R.string.notifcation_default_message));
+                        ActivationNotification.notify(context);
                 }
             }
         }

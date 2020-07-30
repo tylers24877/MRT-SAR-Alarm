@@ -9,6 +9,7 @@
 package uk.mrs.saralarm;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -88,8 +89,10 @@ public class Alarm extends Activity {
             e.printStackTrace();
         }
 
+
         //start the playback of the media player.
-        mp.start();
+        //mp.start();
+
 
         //force the sound to be full volume.
         //get the audio manager for the device.
@@ -188,9 +191,9 @@ public class Alarm extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (mp != null)
-            //start playing the media player.
-            mp.start();
+        // if (mp != null)
+        //start playing the media player.
+        // mp.start();
     }
 
     /**
@@ -218,6 +221,13 @@ public class Alarm extends Activity {
         assert audio != null;
         audio.setStreamVolume(AudioManager.STREAM_VOICE_CALL, originalAudio, 0);
         vibrator.cancel();
+
+        //cancel the notification which activated the alarm
+        NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        nMgr.cancel(0);
+
+        //display the post alarm notification
+        ActivationNotification.notify_postAlarm(this);
     }
 
     @Override
