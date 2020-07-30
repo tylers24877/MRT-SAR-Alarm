@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">SARCALL Alarm</string>
+
+    <string name="acitvation_notification_title_template">SARCALL Activated</string>
+
+    <string name="alarm_button_stop">Stop Alarm</string>
+
+
+    <string name="pref_enabled_summary">Enable or disable the alarm</string>
+    <string name="pref_enabled_title">Enabled</string>
+
+    <string name="alarm_screen_title">SARCALL</string>
+
+    <string name="notifcation_default_message">MRT SARCALL text received</string>
+    <string name="appwidget_text">SARCALL</string>
+    <string name="add_widget">Add widget</string>
+    <string name="alarm_sar_a_button_text">SAR A</string>
+</resources>

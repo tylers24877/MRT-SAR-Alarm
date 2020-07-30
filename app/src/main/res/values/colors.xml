@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="status_bar">#F57C00</color>
+    <color name="toolbar">#FF9800</color>
+    <color name="background">#ffffffff</color>
+    <color name="accent">#651FFF</color>
+
+</resources>
