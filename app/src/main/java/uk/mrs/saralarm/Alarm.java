@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by Tyler Simmonds.
+ *  * Copyright (c) 2020 . All rights reserved.
+ *  * Last modified 28/07/20 12:48
+ *
+ */
+
 package uk.mrs.saralarm;
 
 import android.app.Activity;
@@ -43,7 +51,7 @@ public class Alarm extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       //----------------------------------------------------------------
+        //----------------------------------------------------------------
         //set the activity to be full screen and lockscreen.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         Window window = getWindow();
@@ -173,6 +181,7 @@ public class Alarm extends Activity {
             }
         });
     }
+
     /**
      * Called when activity resumed.
      */
@@ -181,7 +190,7 @@ public class Alarm extends Activity {
         super.onResume();
         if (mp != null)
             //start playing the media player.
-             mp.start();
+            mp.start();
     }
 
     /**
@@ -210,6 +219,7 @@ public class Alarm extends Activity {
         audio.setStreamVolume(AudioManager.STREAM_VOICE_CALL, originalAudio, 0);
         vibrator.cancel();
     }
+
     @Override
     public void onBackPressed() {
 

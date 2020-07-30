@@ -1,3 +1,11 @@
+<!--
+  ~ /**
+  ~  * Created by Tyler Simmonds.
+  ~  * Copyright (c) 2020 . All rights reserved.
+  ~  * Last modified 30/07/20 14:03
+  ~  */
+  -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"

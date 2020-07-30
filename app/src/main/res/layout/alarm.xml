@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ /**
+  ~  * Created by Tyler Simmonds.
+  ~  * Copyright (c) 2020 . All rights reserved.
+  ~  * Last modified 30/07/20 14:03
+  ~  */
+  -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"

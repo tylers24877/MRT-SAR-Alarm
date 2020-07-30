@@ -1,4 +1,13 @@
+/*
+ * *
+ *  * Created by Tyler Simmonds.
+ *  * Copyright (c) 2020 . All rights reserved.
+ *  * Last modified 28/07/20 13:50
+ *
+ */
+
 package uk.mrs.saralarm;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.appwidget.AppWidgetManager;
@@ -9,17 +18,16 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.preference.PreferenceFragmentCompat;
-
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.preference.PreferenceFragmentCompat;
 
 
 /**
@@ -28,6 +36,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
+
     /**
      * Called when activity is created.
      */
@@ -35,28 +44,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //if true,
         //set the view to the main activity.
         setContentView(R.layout.main_activity);
 
         //get the toolbar from the view by id.
         Toolbar toolbar = findViewById(R.id.toolbar);
 
-        //set the toolbar as actionbar. To support lolipop.
+        //set the toolbar as actionbar. To support lollipop.
         setSupportActionBar(toolbar);
 
         //set the fragment to preferences fragment.
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new PrefsFragment()).commit();
 
 
-        // Here, thisActivity is the current activity
+        //Check if the SMS permission has been granted.
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS,Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            //if not granted, request permission.
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS, Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
         }
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+        //request disable battery saver mode. Otherwise the alarm will not trigger when the device is sleeping
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Intent intent = new Intent();
             String packageName = getPackageName();
             PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
@@ -84,13 +94,18 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Called when item is selected from Menu
+     *
      * @param item item selected
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-                     return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
+
+    /**
+     * This class is used to update the widget if the settings are changed within the app.
+     */
     public static class PrefsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -108,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 requireContext().sendBroadcast(intent);
             }
         }
+
         @Override
         public void onResume() {
             super.onResume();

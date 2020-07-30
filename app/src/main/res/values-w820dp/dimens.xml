@@ -1,3 +1,11 @@
+<!--
+  ~ /**
+  ~  * Created by Tyler Simmonds.
+  ~  * Copyright (c) 2020 . All rights reserved.
+  ~  * Last modified 04/04/18 13:09
+  ~  */
+  -->
+
 <resources>
     <!-- Example customization of dimensions originally defined in res/values/dimens.xml
          (such as screen margins) for screens with more than 820dp of available width. This

@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ /**
+  ~  * Created by Tyler Simmonds.
+  ~  * Copyright (c) 2020 . All rights reserved.
+  ~  * Last modified 04/04/18 13:09
+  ~  */
+  -->
+
 <resources>
 
     <color name="status_bar">#F57C00</color>

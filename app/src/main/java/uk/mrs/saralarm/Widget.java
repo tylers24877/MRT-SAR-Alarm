@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by Tyler Simmonds.
+ *  * Copyright (c) 2020 . All rights reserved.
+ *  * Last modified 28/07/20 12:48
+ *
+ */
+
 package uk.mrs.saralarm;
 
 import android.app.PendingIntent;
@@ -30,7 +38,7 @@ public class Widget extends AppWidgetProvider {
 
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId,RemoteViews views) {
+                                int appWidgetId, RemoteViews views) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 
         CharSequence widgetText = context.getString(R.string.appwidget_text);

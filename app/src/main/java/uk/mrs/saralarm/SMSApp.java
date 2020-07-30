@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by Tyler Simmonds.
+ *  * Copyright (c) 2020 . All rights reserved.
+ *  * Last modified 28/07/20 13:26
+ *
+ */
+
 package uk.mrs.saralarm;
 
 import android.content.BroadcastReceiver;

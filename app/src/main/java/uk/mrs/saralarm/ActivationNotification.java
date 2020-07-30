@@ -1,3 +1,11 @@
+/*
+ * *
+ *  * Created by Tyler Simmonds.
+ *  * Copyright (c) 2020 . All rights reserved.
+ *  * Last modified 28/07/20 12:48
+ *
+ */
+
 package uk.mrs.saralarm;
 
 import android.annotation.SuppressLint;
@@ -17,8 +25,17 @@ import androidx.core.app.NotificationCompat;
 
 
 public class ActivationNotification {
+
+    //Notification unique string
     public static String NOTIFICATION_ACTION_SAR_A = "uk.mrs.saralarm.notification_sar_a";
 
+
+    /**
+     * When called, the notification will appear, trigging the siren/alarm when the device is locked.
+     *
+     * @param context     application context
+     * @param messageBody String of text to display on the notification.
+     */
     static void notify(final Context context, String messageBody) {
 
         final Resources res = context.getResources();
@@ -28,15 +45,18 @@ public class ActivationNotification {
 
 
         //fullscreen intent
+        //Alarm.class is the activity for the siren and alarm.
+        // TODO: 30/07/2020 Disable the alarm from triggering when clicking on the notification.
         Intent fullScreenIntent = new Intent(context, Alarm.class);
         fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         fullScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(context, 0, fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //action notification
+        //set the intent for the SAR A button. TODO: 30/07/2020  Add the other SAR button replies.
         Intent broadcastIntent = new Intent(context, NotificationReceiver.class);
         broadcastIntent.setAction(NOTIFICATION_ACTION_SAR_A);
-        PendingIntent actionIntent = PendingIntent.getBroadcast(context,0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent actionIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Action action = new NotificationCompat.Action.Builder(0, "SAR A", actionIntent).build();
 
@@ -55,7 +75,7 @@ public class ActivationNotification {
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // Since android Oreo notification channel is needed.
+        // Since android Oreo, notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,
                     "Alarm Trigger",
@@ -74,7 +94,8 @@ public class ActivationNotification {
         @Override
         public void onReceive(final Context context, Intent intent) {
             if (NOTIFICATION_ACTION_SAR_A.equals(intent.getAction())) {
-                //send SMS to SARCALL
+                //send SMS to SARCALL when SAR A is clicked on the notification.
+                // TODO: 30/07/2020 add more buttons.
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage("07537415551", null, "SAR A", null, null);
 
