@@ -12,11 +12,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.display.DisplayManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.telephony.SmsMessage;
+import android.view.Display;
 
 import androidx.preference.PreferenceManager;
 
+import java.util.Set;
 
 /**
  * The BroadcastReceiver of the Text messages.
@@ -38,6 +43,9 @@ public class SMSApp extends BroadcastReceiver {
 
         //check weather the app is enabled.
         if (pref.getBoolean("prefEnabled", false)) {
+            Set<String> activationSet = pref.getStringSet("triggerResponses", null);
+            if (activationSet == null || activationSet.isEmpty()) return;
+
             //get bundle of extras from intent.
             Bundle bundle = intent.getExtras();
             //check whether the bundle is not null
@@ -54,25 +62,50 @@ public class SMSApp extends BroadcastReceiver {
                     //work out the body message from the current SMS message
                     String message = currentMessage.getDisplayMessageBody();
 
-                    //check whether the message, when lower case and no spaces, equals the string
-                    // entered in preferences, when lower case and all spaces removed.
-                    String[] activation = {"LEEMINGMRT FT", "VALLEYMRT FT", "LOSSIEMRT FT"};
-
                     //if true,
                     //create a notification alerting that the alarm has sounded.
-                    if (checkStringArray(activation, message))
-                        ActivationNotification.notify(context);
+                    if (checkStringSet(activationSet, message))
+                        if (checkScreenState(context)) {
+                            ActivationNotification.notify_postAlarm(context);
+                        } else {
+                            ActivationNotification.notify(context);
+                        }
                 }
             }
         }
     }
 
-    public boolean checkStringArray(String[] SA, String m) {
-        for (String s : SA) {
-            if(m.toLowerCase().replaceAll("\\s+", "").startsWith(s.replaceAll("\\s+", "").toLowerCase())){
+    /**
+     * @param SS Set - Set of Strings.
+     * @param m  KeyString - Check against the set(SS) to see it it starts with m
+     * @return Whether there was a match.
+     */
+    public boolean checkStringSet(Set<String> SS, String m) {
+        for (String s : SS) {
+            if (m.toLowerCase().replaceAll("\\s+", "").startsWith(s.replaceAll("\\s+", "").toLowerCase())) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * @param context App context.
+     * @return True if screen is ON. False is screen is OFF
+     */
+    private boolean checkScreenState(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            DisplayManager dm = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
+            for (Display display : dm.getDisplays()) {
+                if (display.getState() == Display.STATE_ON) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            //noinspection
+            return pm.isScreenOn();
+        }
     }
 }

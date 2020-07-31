@@ -6,11 +6,20 @@
   ~  */
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
         android:defaultValue="false"
         android:key="prefEnabled"
         android:summary="@string/pref_enabled_summary"
         android:title="@string/pref_enabled_title" />
+
+    <MultiSelectListPreference
+        android:defaultValue="@array/triggerListPref"
+        android:dialogTitle="@string/triggerPrefTitle"
+        android:entries="@array/triggerListPrefText"
+        android:entryValues="@array/triggerListPref"
+        android:key="triggerResponses"
+        android:summary="This is the trigger text used to activate the SARCALL Alarm"
+        android:title="@string/triggerPrefTitle" />
 </PreferenceScreen>

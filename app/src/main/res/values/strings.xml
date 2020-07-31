@@ -23,4 +23,7 @@
     <string name="appwidget_text">SARCALL</string>
     <string name="add_widget">Add widget</string>
     <string name="alarm_sar_a_button_text">SAR A</string>
+    <string name="triggerPrefTitle">SARCALL Triggers</string>
+
+
 </resources>
