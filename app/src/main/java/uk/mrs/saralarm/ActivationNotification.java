@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 28/07/20 12:48
+ *  * Last modified 06/08/20 21:09
  *
  */
 
@@ -44,7 +44,7 @@ public class ActivationNotification {
         final Resources res = context.getResources();
 
         //The title of the Notification.
-        final String title = res.getString(R.string.acitvation_notification_title_template);
+        final String title = res.getString(R.string.activation_notification_title_template);
 
 
         //fullscreen intent
@@ -59,10 +59,10 @@ public class ActivationNotification {
 
 
         //build notification
-        String channelId = "Alarm Trigger Full Screen";
+        String channelId = context.getString(R.string.notification_alarm_channel_id);
         Builder notificationBuilder =
                 new Builder(context, channelId)
-                        .setSmallIcon(R.drawable.notif_icon)
+                        .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
                         .setContentTitle(title)
                         .setAutoCancel(true)
                         .setPriority(PRIORITY_MAX)
@@ -96,7 +96,7 @@ public class ActivationNotification {
         final Resources res = context.getResources();
 
         //The title of the Notification.
-        final String title = res.getString(R.string.acitvation_notification_title_template);
+        final String title = res.getString(R.string.activation_notification_title_template);
 
         //action notification
         //set the intent for the SAR A button. TODO: 30/07/2020  Add the other SAR button replies.
@@ -106,17 +106,24 @@ public class ActivationNotification {
 
         Action action = new Action.Builder(0, "SAR A", actionIntent).build();
 
+        Intent notificationIntent = new Intent(context, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context,
+                0, notificationIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+
         //build notification
         String channelId = "Post Alarm Trigger";
         Builder notificationBuilder =
                 new Builder(context, channelId)
-                        .setSmallIcon(R.drawable.notif_icon)
+                        .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
                         .setContentTitle(title)
                         .setContentText("SARCALL alarm triggered!")
                         .setStyle(new BigTextStyle().bigText("SARCALL alarm triggered! Please respond with SAR A if attending"))
                         .setAutoCancel(true)
+                        .setContentIntent(contentIntent)
                         .setPriority(PRIORITY_MAX)
                         .setCategory(CATEGORY_ALARM)
+
                         .setColor(Color.argb(255, 204, 51, 1))
                         .addAction(action);
 
@@ -135,7 +142,6 @@ public class ActivationNotification {
         //notify notification (display)
         notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
     }
-
     public static class NotificationReceiver extends BroadcastReceiver {
         @SuppressLint("UnlocalizedSms")
         @Override

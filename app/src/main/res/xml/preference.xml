@@ -2,11 +2,12 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 30/07/20 14:03
+  ~  * Last modified 07/08/20 16:08
   ~  */
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreference
         android:defaultValue="false"
@@ -15,11 +16,24 @@
         android:title="@string/pref_enabled_title" />
 
     <MultiSelectListPreference
-        android:defaultValue="@array/triggerListPref"
-        android:dialogTitle="@string/triggerPrefTitle"
+        android:dialogTitle="@string/trigger_pref_title"
         android:entries="@array/triggerListPrefText"
         android:entryValues="@array/triggerListPref"
         android:key="triggerResponses"
-        android:summary="This is the trigger text used to activate the SARCALL Alarm"
-        android:title="@string/triggerPrefTitle" />
+        android:summary="@string/triggers_sum"
+        android:title="@string/trigger_pref_title" />
+
+
+    <PreferenceCategory app:title="Experimental" />
+    <EditTextPreference
+        android:enabled="false"
+        android:key="triggerResponsesCustom"
+        android:summary="If your SAR team is not displayed above, please enter your custom trigger here. The app will only trigger the alarm if it spots the trigger phrase in an SMS"
+        android:title="Custom Trigger" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:enabled="false"
+        android:key="prefPhoneNumberMethod"
+        android:summary="Use the SARCALL number, rather than a trigger phrase to activate the alarm"
+        android:title="SARCALL phone number activation" />
 </PreferenceScreen>

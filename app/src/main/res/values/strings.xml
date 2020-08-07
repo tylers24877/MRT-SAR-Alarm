@@ -2,28 +2,15 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 28/07/20 13:56
+  ~  * Last modified 06/08/20 21:09
   ~  */
   -->
 
 <resources>
+    //Other Strings
     <string name="app_name">SARCALL Alarm</string>
 
-    <string name="acitvation_notification_title_template">SARCALL Activated</string>
-
-    <string name="alarm_button_stop">Stop Alarm</string>
-
-
-    <string name="pref_enabled_summary">Enable or disable the alarm</string>
-    <string name="pref_enabled_title">Enabled</string>
-
-    <string name="alarm_screen_title">SARCALL</string>
-
-    <string name="notifcation_default_message">MRT SARCALL text received</string>
+    <string name="appwidget_add">Add widget</string>
     <string name="appwidget_text">SARCALL</string>
-    <string name="add_widget">Add widget</string>
-    <string name="alarm_sar_a_button_text">SAR A</string>
-    <string name="triggerPrefTitle">SARCALL Triggers</string>
-
 
 </resources>
