@@ -2,26 +2,21 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 06/08/20 21:09
+ *  * Last modified 07/08/20 20:25
  *
  */
 
 package uk.mrs.saralarm;
 
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
-import android.telephony.SmsManager;
-import android.widget.Toast;
 
-import static androidx.core.app.NotificationCompat.Action;
 import static androidx.core.app.NotificationCompat.BigTextStyle;
 import static androidx.core.app.NotificationCompat.Builder;
 import static androidx.core.app.NotificationCompat.CATEGORY_ALARM;
@@ -100,11 +95,7 @@ public class ActivationNotification {
 
         //action notification
         //set the intent for the SAR A button. TODO: 30/07/2020  Add the other SAR button replies.
-        Intent broadcastIntent = new Intent(context, NotificationReceiver.class);
-        broadcastIntent.setAction(NOTIFICATION_ACTION_SAR_A);
-        PendingIntent actionIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Action action = new Action.Builder(0, "SAR A", actionIntent).build();
 
         Intent notificationIntent = new Intent(context, MainActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context,
@@ -123,9 +114,7 @@ public class ActivationNotification {
                         .setContentIntent(contentIntent)
                         .setPriority(PRIORITY_MAX)
                         .setCategory(CATEGORY_ALARM)
-
-                        .setColor(Color.argb(255, 204, 51, 1))
-                        .addAction(action);
+                        .setColor(Color.argb(255, 204, 51, 1));
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -141,23 +130,5 @@ public class ActivationNotification {
         assert notificationManager != null;
         //notify notification (display)
         notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
-    }
-    public static class NotificationReceiver extends BroadcastReceiver {
-        @SuppressLint("UnlocalizedSms")
-        @Override
-        public void onReceive(final Context context, Intent intent) {
-            if (NOTIFICATION_ACTION_SAR_A.equals(intent.getAction())) {
-                //send SMS to SARCALL when SAR A is clicked on the notification.
-                // TODO: 30/07/2020 add more buttons.
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage("07537415551", null, "SAR A", null, null);
-
-                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.cancel(0);
-
-                Toast toast = Toast.makeText(context, "SAR A sent to SARCALL", Toast.LENGTH_LONG);
-                toast.show();
-            }
-        }
     }
 }

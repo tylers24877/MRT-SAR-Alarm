@@ -2,7 +2,7 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 07/08/20 16:09
+  ~  * Last modified 07/08/20 17:50
   ~  */
   -->
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="57dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
             android:paddingTop="15dp"
@@ -70,7 +70,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/respond_sms_preview_scrollview" />
+            app:layout_constraintTop_toBottomOf="@+id/respond_preview_date_txtview" />
 
         <Button
             android:id="@+id/respond_sar_l_button"
@@ -114,5 +114,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/respond_sar_a_button" />
+
+        <TextView
+            android:id="@+id/respond_preview_date_txtview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Date Recieved"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintStart_toStartOf="@+id/respond_sms_preview_scrollview"
+            app:layout_constraintTop_toBottomOf="@+id/respond_sms_preview_scrollview" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

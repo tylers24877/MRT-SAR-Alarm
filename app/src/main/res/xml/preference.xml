@@ -2,7 +2,7 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 07/08/20 16:08
+  ~  * Last modified 07/08/20 20:25
   ~  */
   -->
 
@@ -24,7 +24,13 @@
         android:title="@string/trigger_pref_title" />
 
 
-    <PreferenceCategory app:title="Experimental" />
+    <PreferenceCategory app:title="Advanced" />
+    <EditTextPreference
+        android:digits="0123456789"
+        android:enabled="false"
+        android:key="sarResponsePhoneNumber"
+        android:summary="SARCALL number for SAR A/L/N SMS messages."
+        android:title="SARCALL Response Phone number" />
     <EditTextPreference
         android:enabled="false"
         android:key="triggerResponsesCustom"

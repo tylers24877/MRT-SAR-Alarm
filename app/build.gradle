@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 31/07/20 23:28
+ *  * Last modified 07/08/20 20:24
  *
  */
 
@@ -23,8 +23,8 @@ android {
         applicationId "uk.mrs.saralarm"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 06
-        versionName "1.3.7"
+        versionCode 07
+        versionName "1.4.0"
         multiDexEnabled true
     }
     buildTypes {
