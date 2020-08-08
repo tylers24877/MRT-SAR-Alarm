@@ -1,0 +1,12 @@
+<MRT-SAR-Alarm>
+  <update>
+    <latestVersion>1.4.1</latestVersion>
+    <latestVersionCode>10</latestVersionCode>
+    <url>https://github.com/tylers24877/MRT-SAR-Alarm/releases</url>
+    <releaseNotes>
+- First evolution
+- Second evolution
+- Bug fixes
+    </releaseNotes>
+  </update>
+</MRT-SAR-Alarm>
