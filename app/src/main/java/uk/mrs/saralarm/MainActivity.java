@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 07/08/20 20:25
+ *  * Last modified 09/08/20 00:40
  *
  */
 
@@ -29,8 +29,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
+import com.github.javiersantos.appupdater.AppUpdater;
+import com.github.javiersantos.appupdater.enums.Display;
+import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.concurrent.TimeUnit;
+
+import uk.mrs.saralarm.support.UpdateWorker;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,6 +89,25 @@ public class MainActivity extends AppCompatActivity {
 
         //get the menu items from XML
         inflater.inflate(R.menu.main_activity_menu, menu);
+
+        AppUpdater appUpdater = new AppUpdater(this)
+                .setUpdateFrom(UpdateFrom.XML)
+                .setDisplay(Display.DIALOG)
+                .setUpdateXML("https://raw.githubusercontent.com/tylers24877/MRT-SAR-Alarm/master/update.xml")
+                .setCancelable(false);
+        appUpdater.start();
+
+
+        PeriodicWorkRequest updateRequest =
+                new PeriodicWorkRequest.Builder(UpdateWorker.class, 12, TimeUnit.HOURS)
+                        // Constraints
+                        .build();
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                "SARCALL_CHECK_UPDATE",
+                ExistingPeriodicWorkPolicy.KEEP,
+                updateRequest);
+
         return super.onCreateOptionsMenu(menu);
     }
 

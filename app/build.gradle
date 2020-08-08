@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 08/08/20 19:09
+ *  * Last modified 09/08/20 00:39
  *
  */
 
@@ -23,8 +23,8 @@ android {
         applicationId "uk.mrs.saralarm"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 9
-        versionName "1.4.1"
+        versionCode 10
+        versionName "1.4.2"
         multiDexEnabled true
     }
     buildTypes {
@@ -52,6 +52,14 @@ implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.github.javiersantos:AppUpdater:2.7'
+
+
+    def work_version = "2.4.0"
+
+    // (Java only)
+    implementation "androidx.work:work-runtime:$work_version"
+
 }
 
 

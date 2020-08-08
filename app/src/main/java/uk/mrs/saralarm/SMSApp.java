@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 28/07/20 13:26
+ *  * Last modified 09/08/20 00:43
  *
  */
 
@@ -21,6 +21,7 @@ import android.view.Display;
 
 import androidx.preference.PreferenceManager;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -43,8 +44,15 @@ public class SMSApp extends BroadcastReceiver {
 
         //check weather the app is enabled.
         if (pref.getBoolean("prefEnabled", false)) {
-            Set<String> activationSet = pref.getStringSet("triggerResponses", null);
-            if (activationSet == null || activationSet.isEmpty()) return;
+            //Set<String> activationSet = pref.getStringSet("triggerResponses", null);
+            Set<String> activationSet = new HashSet<>();
+            activationSet.add("LEEMINGMRT FT");
+            activationSet.add("VALLEYMRT FT");
+            activationSet.add("LOSSIEMRT FT");
+
+            boolean usePhoneNumber = pref.getBoolean("prefUsePhoneNumber", false);
+
+            if (activationSet.isEmpty()) return;
 
             //get bundle of extras from intent.
             Bundle bundle = intent.getExtras();
@@ -62,9 +70,10 @@ public class SMSApp extends BroadcastReceiver {
                     //work out the body message from the current SMS message
                     String message = currentMessage.getDisplayMessageBody();
 
+
                     //if true,
                     //create a notification alerting that the alarm has sounded.
-                    if (checkStringSet(activationSet, message))
+                    if (!usePhoneNumber && checkStringSet(activationSet, message))
                         if (checkScreenState(context)) {
                             ActivationNotification.notify_postAlarm(context);
                         } else {

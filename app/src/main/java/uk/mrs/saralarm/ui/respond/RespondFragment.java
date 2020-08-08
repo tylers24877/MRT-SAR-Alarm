@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 07/08/20 20:25
+ *  * Last modified 09/08/20 00:43
  *
  */
 
@@ -14,7 +14,6 @@ import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Rect;
@@ -40,9 +39,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.preference.PreferenceManager;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
@@ -110,8 +109,12 @@ public class RespondFragment extends Fragment {
     }
 
     public void setPreview(Context context, View root) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        Set<String> activationSet = pref.getStringSet("triggerResponses", null);
+        //SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        //Set<String> activationSet = pref.getStringSet("triggerResponses", null);
+        Set<String> activationSet = new HashSet<>();
+        activationSet.add("LEEMINGMRT FT");
+        activationSet.add("VALLEYMRT FT");
+        activationSet.add("LOSSIEMRT FT");
 
         ContentResolver cr = context.getContentResolver();
         Cursor c;
