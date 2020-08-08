@@ -2,12 +2,11 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 07/08/20 20:25
+  ~  * Last modified 08/08/20 19:11
   ~  */
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
         android:defaultValue="false"
@@ -22,24 +21,4 @@
         android:key="triggerResponses"
         android:summary="@string/triggers_sum"
         android:title="@string/trigger_pref_title" />
-
-
-    <PreferenceCategory app:title="Advanced" />
-    <EditTextPreference
-        android:digits="0123456789"
-        android:enabled="false"
-        android:key="sarResponsePhoneNumber"
-        android:summary="SARCALL number for SAR A/L/N SMS messages."
-        android:title="SARCALL Response Phone number" />
-    <EditTextPreference
-        android:enabled="false"
-        android:key="triggerResponsesCustom"
-        android:summary="If your SAR team is not displayed above, please enter your custom trigger here. The app will only trigger the alarm if it spots the trigger phrase in an SMS"
-        android:title="Custom Trigger" />
-    <SwitchPreference
-        android:defaultValue="false"
-        android:enabled="false"
-        android:key="prefPhoneNumberMethod"
-        android:summary="Use the SARCALL number, rather than a trigger phrase to activate the alarm"
-        android:title="SARCALL phone number activation" />
 </PreferenceScreen>

@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 07/08/20 20:25
+ *  * Last modified 08/08/20 00:41
  *
  */
 
@@ -109,7 +109,7 @@ public class ActivationNotification {
                         .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
                         .setContentTitle(title)
                         .setContentText("SARCALL alarm triggered!")
-                        .setStyle(new BigTextStyle().bigText("SARCALL alarm triggered! Please respond with SAR A if attending"))
+                        .setStyle(new BigTextStyle().bigText("SARCALL alarm triggered! Click to respond."))
                         .setAutoCancel(true)
                         .setContentIntent(contentIntent)
                         .setPriority(PRIORITY_MAX)

@@ -2,13 +2,13 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 07/08/20 16:08
+  ~  * Last modified 08/08/20 19:05
   ~  */
   -->
 
 <resources>
     <string name="pref_enabled_summary">Enable or disable the SMS alarm</string>
     <string name="pref_enabled_title">SARCALL Alarm Enabled</string>
-    <string name="trigger_pref_title">SARCALL SMS Triggers</string>
-    <string name="triggers_sum">Select which SAR teams the SARCALL Alarm app will listen out for when you receive an SMS</string>
+    <string name="trigger_pref_title">SAR Team</string>
+    <string name="triggers_sum">Select your SAR Team</string>
 </resources>
