@@ -8,10 +8,10 @@
 
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.4.1</latestVersion>
-    <latestVersionCode>10</latestVersionCode>
+    <latestVersion>1.4.2</latestVersion>
+    <latestVersionCode>12</latestVersionCode>
     <url>
-      https://github.com/tylers24877/MRT-SAR-Alarm/releases/download/v1.4-beta.2/SARCALL.Alarm.1.4.2.apk
+      https://github.com/tylers24877/MRT-SAR-Alarm/wiki/Download-SARCALL-Alarm
     </url>
     <releaseNotes>
       - Added update checker
