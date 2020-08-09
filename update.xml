@@ -11,7 +11,7 @@
     <latestVersion>1.4.1</latestVersion>
     <latestVersionCode>10</latestVersionCode>
     <url>
-      https://github.com/tylers24877/MRT-SAR-Alarm/releases/download/v1.4-beta.2
+      https://github.com/tylers24877/MRT-SAR-Alarm/releases/tag/v1.4-beta.2
     </url>
     <releaseNotes>
       - Added update checker
