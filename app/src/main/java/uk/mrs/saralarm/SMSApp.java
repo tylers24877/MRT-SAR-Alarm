@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 09/08/20 00:43
+ *  * Last modified 09/08/20 21:38
  *
  */
 
@@ -21,16 +21,22 @@ import android.view.Display;
 
 import androidx.preference.PreferenceManager;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * The BroadcastReceiver of the Text messages.
- *
+ * <p>
  * Created by Tyler on 25/03/2015.
  * (c)2014 Tyler Simmonds||All rights reserved.
  */
 public class SMSApp extends BroadcastReceiver {
+
+
+    FirebaseAnalytics mFirebaseAnalytics;
+
     /**
      * Called when a text message is received.
      *
@@ -41,6 +47,7 @@ public class SMSApp extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         //get preferences for application
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
 
         //check weather the app is enabled.
         if (pref.getBoolean("prefEnabled", false)) {
@@ -76,8 +83,10 @@ public class SMSApp extends BroadcastReceiver {
                     if (!usePhoneNumber && checkStringSet(activationSet, message))
                         if (checkScreenState(context)) {
                             ActivationNotification.notify_postAlarm(context);
+                            mFirebaseAnalytics.logEvent("alarm_screen_on", null);
                         } else {
                             ActivationNotification.notify(context);
+                            mFirebaseAnalytics.logEvent("alarm_screen_off", null);
                         }
                 }
             }

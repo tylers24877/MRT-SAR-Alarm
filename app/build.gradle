@@ -2,11 +2,13 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 09/08/20 00:39
+ *  * Last modified 09/08/20 21:36
  *
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 android {
     signingConfigs {
         Main_Signer {
@@ -21,10 +23,10 @@ android {
 
     defaultConfig {
         applicationId "uk.mrs.saralarm"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
-        versionCode 10
-        versionName "1.4.2"
+        versionCode 13
+        versionName "1.4.3"
         multiDexEnabled true
     }
     buildTypes {
@@ -43,7 +45,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference:1.1.1'
@@ -54,12 +56,9 @@ implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'com.github.javiersantos:AppUpdater:2.7'
 
-
-    def work_version = "2.4.0"
-
     // (Java only)
-    implementation "androidx.work:work-runtime:$work_version"
+    implementation "androidx.work:work-runtime:2.4.0"
 
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
 }
-
-

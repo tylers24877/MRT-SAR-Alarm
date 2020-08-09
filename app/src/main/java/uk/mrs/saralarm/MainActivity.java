@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 09/08/20 00:40
+ *  * Last modified 09/08/20 21:38
  *
  */
 
@@ -37,18 +37,19 @@ import com.github.javiersantos.appupdater.AppUpdater;
 import com.github.javiersantos.appupdater.enums.Display;
 import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.concurrent.TimeUnit;
 
 import uk.mrs.saralarm.support.UpdateWorker;
 
 public class MainActivity extends AppCompatActivity {
-
+    private FirebaseAnalytics mFirebaseAnalytics;
     @SuppressLint("BatteryLife")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         setContentView(R.layout.activity_main);
         //get the toolbar from the view by id.
         Toolbar toolbar = findViewById(R.id.ResponseToolbar);
@@ -75,6 +76,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+
+        AppUpdater appUpdater = new AppUpdater(this)
+                .setUpdateFrom(UpdateFrom.XML)
+                .setDisplay(Display.DIALOG)
+                .setUpdateXML("https://raw.githubusercontent.com/tylers24877/MRT-SAR-Alarm/master/update.xml")
+                .setCancelable(false);
+        appUpdater.start();
+
+
+        PeriodicWorkRequest updateRequest =
+                new PeriodicWorkRequest.Builder(UpdateWorker.class, 12, TimeUnit.HOURS, 11, TimeUnit.HOURS)
+                        // Constraints
+                        .build();
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                "SARCALL_CHECK_UPDATE",
+                ExistingPeriodicWorkPolicy.KEEP,
+                updateRequest);
     }
 
     /**
@@ -89,24 +108,6 @@ public class MainActivity extends AppCompatActivity {
 
         //get the menu items from XML
         inflater.inflate(R.menu.main_activity_menu, menu);
-
-        AppUpdater appUpdater = new AppUpdater(this)
-                .setUpdateFrom(UpdateFrom.XML)
-                .setDisplay(Display.DIALOG)
-                .setUpdateXML("https://raw.githubusercontent.com/tylers24877/MRT-SAR-Alarm/master/update.xml")
-                .setCancelable(false);
-        appUpdater.start();
-
-
-        PeriodicWorkRequest updateRequest =
-                new PeriodicWorkRequest.Builder(UpdateWorker.class, 12, TimeUnit.HOURS)
-                        // Constraints
-                        .build();
-
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-                "SARCALL_CHECK_UPDATE",
-                ExistingPeriodicWorkPolicy.KEEP,
-                updateRequest);
 
         return super.onCreateOptionsMenu(menu);
     }

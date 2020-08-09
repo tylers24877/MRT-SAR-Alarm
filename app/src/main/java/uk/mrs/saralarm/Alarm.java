@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 28/07/20 12:48
+ *  * Last modified 09/08/20 21:38
  *
  */
 
@@ -35,7 +35,6 @@ import java.io.IOException;
 public class Alarm extends Activity {
     //The instance of the Media Player
     MediaPlayer mp;
-
     //The instance of the Wake lock so the alarm will work on a locked device.
     //private PowerManager.WakeLock wl;
 
@@ -45,6 +44,7 @@ public class Alarm extends Activity {
     //The original audio volume before the siren is played.
     private int originalAudio;
 
+
     /**
      * Called when the activity is created.
      * @param savedInstanceState The saved state of an application
@@ -52,6 +52,7 @@ public class Alarm extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //----------------------------------------------------------------
         //set the activity to be full screen and lockscreen.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -155,10 +156,7 @@ public class Alarm extends Activity {
         drawable.setOneShot(false);
 
         //set the background to the drawable.
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN)
-            layout.setBackgroundDrawable(drawable);
-        else
-            layout.setBackground(drawable);
+        layout.setBackground(drawable);
 
         //start the drawable animation.
         handler.postDelayed(new Runnable() {
