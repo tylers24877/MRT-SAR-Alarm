@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 09/08/20 00:43
+ *  * Last modified 14/08/20 17:30
  *
  */
 
@@ -20,6 +20,9 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.telephony.SmsManager;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -38,11 +41,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 import uk.mrs.saralarm.R;
@@ -57,7 +59,7 @@ public class RespondFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        respondViewModel = ViewModelProviders.of(this).get(RespondViewModel.class);
+        respondViewModel = new ViewModelProvider(this).get(RespondViewModel.class);
         View root = inflater.inflate(R.layout.fragment_respond, container, false);
         final Context context = root.getContext();
 
@@ -102,13 +104,13 @@ public class RespondFragment extends Fragment {
             TextView textView = root.findViewById(R.id.respond_sms_preview_txtview);
             TextView textViewDate = root.findViewById(R.id.respond_preview_date_txtview);
             textViewDate.setText("");
-            textView.setText("Permission not granted!");
+            textView.setText(R.string.response_permission_placeholder);
         }
 
         return root;
     }
 
-    public void setPreview(Context context, View root) {
+    public void setPreview(@NonNull Context context, @NonNull View root) {
         //SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         //Set<String> activationSet = pref.getStringSet("triggerResponses", null);
         Set<String> activationSet = new HashSet<>();
@@ -121,9 +123,8 @@ public class RespondFragment extends Fragment {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
             c = cr.query(Telephony.Sms.CONTENT_URI, null, null, null, null);
 
-            int totalSMS = 0;
             if (c != null) {
-                totalSMS = c.getCount();
+                int totalSMS = c.getCount();
                 if (c.moveToFirst()) {
                     for (int j = 0; j < totalSMS; j++) {
                         String smsDate = c.getString(c.getColumnIndexOrThrow(Telephony.Sms.DATE));
@@ -131,15 +132,13 @@ public class RespondFragment extends Fragment {
                         Date date = new Date(Long.parseLong(smsDate));
 
                         if (Integer.parseInt(c.getString(c.getColumnIndexOrThrow(Telephony.Sms.TYPE))) == Telephony.Sms.MESSAGE_TYPE_INBOX) {
-                            if (activationSet != null) {
-                                if (checkStringSet(activationSet, body)) {
-                                    TextView textView = root.findViewById(R.id.respond_sms_preview_txtview);
-                                    TextView textViewDate = root.findViewById(R.id.respond_preview_date_txtview);
-                                    textViewDate.setText(String.format("Received: %s", getDateTimeInstance().format(date)));
-                                    textView.setText(body);
-                                    c.close();
-                                    return;
-                                }
+                            if (checkStringSet(activationSet, body)) {
+                                TextView textView = root.findViewById(R.id.respond_sms_preview_txtview);
+                                TextView textViewDate = root.findViewById(R.id.respond_preview_date_txtview);
+                                textViewDate.setText(String.format("Received: %s", getDateTimeInstance().format(date)));
+                                textView.setText(body);
+                                c.close();
+                                return;
                             }
                         }
                         c.moveToNext();
@@ -147,14 +146,14 @@ public class RespondFragment extends Fragment {
                 }
                 c.close();
                 TextView textView = root.findViewById(R.id.respond_sms_preview_txtview);
-                textView.setText("No messages");
+                textView.setText(R.string.response_no_messages_placeholder);
                 TextView textViewDate = root.findViewById(R.id.respond_preview_date_txtview);
                 textViewDate.setText("");
             }
         }
     }
 
-    public boolean checkStringSet(Set<String> SS, String m) {
+    public boolean checkStringSet(@NonNull Set<String> SS, @NonNull String m) {
         for (String s : SS) {
             if (m.toLowerCase().replaceAll("\\s+", "").startsWith(s.replaceAll("\\s+", "").toLowerCase())) {
                 return true;
@@ -166,7 +165,7 @@ public class RespondFragment extends Fragment {
     public void dialogSARNOpen() {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(@NonNull DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         sendSMSResponse(getContext(), dialog, SARResponseCode.SAR_N, 0, null);
@@ -185,7 +184,7 @@ public class RespondFragment extends Fragment {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    public void dialogSARAOpen(final Context context) {
+    public void dialogSARAOpen(@NonNull final Context context) {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_respond_sar_a);
         Window window = dialog.getWindow();
@@ -197,7 +196,7 @@ public class RespondFragment extends Fragment {
         ConstraintLayout constraintLayout = dialog.findViewById(R.id.respond_dialog_sar_a_constraint_layout);
         constraintLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public boolean onTouch(@NonNull View v, @NonNull MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     EditText editText = dialog.findViewById(R.id.respond_dialog_sar_a_message_editview);
                     if (editText.isFocused()) {
@@ -215,7 +214,7 @@ public class RespondFragment extends Fragment {
         });
 
 
-        //seekbar
+        //seek bar
         final SeekBar seekBar = dialog.findViewById(R.id.respond_dialog_sar_a_seek);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -233,14 +232,23 @@ public class RespondFragment extends Fragment {
 
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onProgressChanged(@NonNull SeekBar seekBar, int progress, boolean fromUser) {
                 if (progress >= 0 && progress <= seekBar.getMax()) {
 
                     int progressCal = progress * 5;
                     respondViewModel.setEta(progressCal);
 
                     TextView etaTxtView = dialog.findViewById(R.id.respond_dialog_sar_a_seek_eta_txtview);
-                    etaTxtView.setText(String.format(Locale.ENGLISH, "Estimated time to RV: %d minutes", respondViewModel.getEta().getValue())); // the TextView Reference
+
+                    SpannableStringBuilder sb = new SpannableStringBuilder("Estimated time to RV: " + progressCal + " minutes");
+
+                    // create a bold StyleSpan to be used on the SpannableStringBuilder
+                    StyleSpan b = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+
+                    // set only the name part of the SpannableStringBuilder to be bold --> 16, 16 + name.length()
+                    sb.setSpan(b, 22, 22 + Integer.toString(progressCal).length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+                    etaTxtView.setText(sb); // the TextView Reference
                     seekBar.setSecondaryProgress(progress);
 
                 }
@@ -265,7 +273,7 @@ public class RespondFragment extends Fragment {
 
 
     @SuppressLint("ClickableViewAccessibility")
-    public void dialogSARLOpen(final Context context) {
+    public void dialogSARLOpen(@NonNull final Context context) {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_respond_sar_l);
         Window window = dialog.getWindow();
@@ -277,7 +285,7 @@ public class RespondFragment extends Fragment {
         ConstraintLayout constraintLayout = dialog.findViewById(R.id.respond_dialog_sar_l_constraint_layout);
         constraintLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public boolean onTouch(@NonNull View v, @NonNull MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     EditText editText = dialog.findViewById(R.id.respond_dialog_sar_l_message_editview);
                     if (editText.isFocused()) {
@@ -295,7 +303,7 @@ public class RespondFragment extends Fragment {
         });
 
 
-        //seekbar
+        //seek bar
         final SeekBar seekBar = dialog.findViewById(R.id.respond_dialog_sar_l_seek);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -313,14 +321,23 @@ public class RespondFragment extends Fragment {
 
 
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onProgressChanged(@NonNull SeekBar seekBar, int progress, boolean fromUser) {
                 if (progress >= 0 && progress <= seekBar.getMax()) {
 
                     int progressCal = (progress * 5) + 30;
                     respondViewModel.setEta(progressCal);
 
                     TextView etaTxtView = dialog.findViewById(R.id.respond_dialog_sar_l_seek_eta_txtview);
-                    etaTxtView.setText(String.format(Locale.ENGLISH, "Estimated time to RV: %d minutes", respondViewModel.getEta().getValue())); // the TextView Reference
+                    SpannableStringBuilder sb = new SpannableStringBuilder("Estimated time to RV: " + progressCal + " minutes");
+
+                    // create a bold StyleSpan to be used on the SpannableStringBuilder
+                    StyleSpan b = new StyleSpan(android.graphics.Typeface.BOLD); // Span to make text bold
+
+                    // set only the name part of the SpannableStringBuilder to be bold --> 16, 16 + name.length()
+                    sb.setSpan(b, 22, 22 + Integer.toString(progressCal).length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE); // make first 4 characters Bold
+
+                    etaTxtView.setText(sb); // the TextView Reference
+
                     seekBar.setSecondaryProgress(progress);
 
                 }
@@ -344,7 +361,7 @@ public class RespondFragment extends Fragment {
     }
 
     @SuppressLint("UnlocalizedSms")
-    public void sendSMSResponse(Context context, DialogInterface dialog, SARResponseCode responseCode, int eta, String message) {
+    public void sendSMSResponse(Context context, @NonNull DialogInterface dialog, @NonNull SARResponseCode responseCode, int eta, String message) {
         SmsManager smsManager = SmsManager.getDefault();
 
         // SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -388,7 +405,7 @@ public class RespondFragment extends Fragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == MY_PERMISSIONS_REQUEST_READ_CONTACTS) {
@@ -398,7 +415,7 @@ public class RespondFragment extends Fragment {
 
                 if (permission.equals(Manifest.permission.READ_SMS)) {
                     if (grantResult == PackageManager.PERMISSION_GRANTED) {
-                        setPreview(getContext(), getView());
+                        setPreview(requireContext(), getView());
                     }
                 }
             }

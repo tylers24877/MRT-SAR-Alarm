@@ -2,12 +2,10 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 07/08/20 16:08
+  ~  * Last modified 14/08/20 17:30
   ~  */
   -->
 
 <resources>
-    <string name="notification_default_message">MRT SARCALL text received</string>
     <string name="notification_alarm_channel_id">Alarm Trigger Full Screen</string>
-    <string name="notification_alarm_sar_a_button_text">SAR A</string>
 </resources>

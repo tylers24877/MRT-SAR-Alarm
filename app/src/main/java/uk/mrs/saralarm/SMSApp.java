@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 09/08/20 21:38
+ *  * Last modified 14/08/20 17:30
  *
  */
 
@@ -19,6 +19,8 @@ import android.os.PowerManager;
 import android.telephony.SmsMessage;
 import android.view.Display;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import androidx.preference.PreferenceManager;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -44,7 +46,8 @@ public class SMSApp extends BroadcastReceiver {
      * @param intent  Intent of the text message?
      */
 
-    public void onReceive(final Context context, Intent intent) {
+    @RequiresPermission(allOf = {"android.permission.INTERNET", "android.permission.ACCESS_NETWORK_STATE", "android.permission.WAKE_LOCK"})
+    public void onReceive(@NonNull final Context context, @NonNull Intent intent) {
         //get preferences for application
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
@@ -98,7 +101,7 @@ public class SMSApp extends BroadcastReceiver {
      * @param m  KeyString - Check against the set(SS) to see it it starts with m
      * @return Whether there was a match.
      */
-    public boolean checkStringSet(Set<String> SS, String m) {
+    public boolean checkStringSet(@NonNull Set<String> SS, @NonNull String m) {
         for (String s : SS) {
             if (m.toLowerCase().replaceAll("\\s+", "").startsWith(s.replaceAll("\\s+", "").toLowerCase())) {
                 return true;
@@ -111,7 +114,7 @@ public class SMSApp extends BroadcastReceiver {
      * @param context App context.
      * @return True if screen is ON. False is screen is OFF
      */
-    private boolean checkScreenState(Context context) {
+    private boolean checkScreenState(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             DisplayManager dm = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
             for (Display display : dm.getDisplays()) {

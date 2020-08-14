@@ -2,10 +2,28 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 07/08/20 17:56
+  ~  * Last modified 14/08/20 17:30
   ~  */
   -->
 
 <resources>
     <string name="respond_received_sarcall_sms_heading">Latest SARCALL SMS</string>
+    <string name="SAR_A_attending_txtview">Attending</string>
+    <string name="sar_a_response_message_editview">Optional: For example, \"On my way.\"</string>
+    <string name="sar_a_send_button">Send</string>
+    <string name="sar_a_response_rv_txt_placeholder">Estimated time to RV:</string>
+    <string name="sar_a_response_message_title">Custom Message:</string>
+    <string name="sar_a_seek_bar_high_time">45m</string>
+    <string name="sar_l_response_title">Late</string>
+    <string name="sar_l_response_send_button">Send</string>
+    <string name="sar_l_response_seek_bar_title">Estimated time to RV:</string>
+    <string name="sar_l_response_custom_message_title">Custom Message:</string>
+    <string name="sar_l_seek_bar_low_time">30m</string>
+    <string name="sar_l_response_seek_bar_high_time">120m</string>
+    <string name="placeholder_text">{PLACEHOLDER TEXT}</string>
+    <string name="response_attending_button">Attending</string>
+    <string name="response_late_button">Late</string>
+    <string name="response_unavailable_button">Unavailable</string>
+    <string name="response_permission_placeholder">Permission not granted!</string>
+    <string name="response_no_messages_placeholder">No messages</string>
 </resources>

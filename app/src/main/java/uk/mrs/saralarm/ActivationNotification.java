@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 08/08/20 00:41
+ *  * Last modified 14/08/20 17:30
  *
  */
 
@@ -17,6 +17,8 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
+
 import static androidx.core.app.NotificationCompat.BigTextStyle;
 import static androidx.core.app.NotificationCompat.Builder;
 import static androidx.core.app.NotificationCompat.CATEGORY_ALARM;
@@ -26,15 +28,16 @@ import static androidx.core.app.NotificationCompat.PRIORITY_MAX;
 public class ActivationNotification {
 
     //Notification unique string
+    @NonNull
     public static String NOTIFICATION_ACTION_SAR_A = "uk.mrs.saralarm.notification_sar_a";
 
 
     /**
-     * When called, the notification will appear, trigging the siren/alarm when the device is locked.
+     * When called, the notification will appear, triggering the siren/alarm when the device is locked.
      *
      * @param context application context
      */
-    static void notify(final Context context) {
+    static void notify(@NonNull final Context context) {
 
         final Resources res = context.getResources();
 
@@ -82,11 +85,11 @@ public class ActivationNotification {
     }
 
     /**
-     * When called, the notification will appear, trigging the siren/alarm when the device is locked.
+     * When called, the notification will appear, triggering the siren/alarm when the device is locked.
      *
      * @param context application context
      */
-    static void notify_postAlarm(final Context context) {
+    static void notify_postAlarm(@NonNull final Context context) {
 
         final Resources res = context.getResources();
 

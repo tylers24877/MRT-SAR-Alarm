@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 07/08/20 16:09
+ *  * Last modified 14/08/20 17:30
  *
  */
 
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModel;
 
 public class RespondViewModel extends ViewModel {
 
-    private MutableLiveData<Integer> mEta;
+    private final MutableLiveData<Integer> mEta;
 
     public RespondViewModel() {
         mEta = new MutableLiveData<>();

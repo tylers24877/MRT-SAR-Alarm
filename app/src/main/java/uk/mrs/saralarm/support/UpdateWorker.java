@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 09/08/20 00:43
+ *  * Last modified 14/08/20 17:30
  *
  */
 
@@ -25,6 +25,7 @@ public class UpdateWorker extends Worker {
         super(context, params);
     }
 
+    @NonNull
     @Override
     public Result doWork() {
 

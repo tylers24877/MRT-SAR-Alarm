@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 09/08/20 21:38
+ *  * Last modified 14/08/20 17:30
  *
  */
 
@@ -24,6 +24,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+
+import androidx.annotation.RequiresPermission;
 
 import java.io.IOException;
 
@@ -49,12 +51,13 @@ public class Alarm extends Activity {
      * Called when the activity is created.
      * @param savedInstanceState The saved state of an application
      */
+    @RequiresPermission("android.permission.VIBRATE")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //----------------------------------------------------------------
-        //set the activity to be full screen and lockscreen.
+        //set the activity to be full screen and lock screen.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
@@ -208,6 +211,7 @@ public class Alarm extends Activity {
     /**
      * Called when the activity is destroyed.
      */
+    @RequiresPermission("android.permission.VIBRATE")
     @Override
     protected void onDestroy() {
         super.onDestroy();

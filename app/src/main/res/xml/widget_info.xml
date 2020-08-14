@@ -2,16 +2,14 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 05/07/20 00:03
+  ~  * Last modified 14/08/20 17:30
   ~  */
   -->
 
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialKeyguardLayout="@layout/app_widget"
     android:initialLayout="@layout/app_widget"
     android:minWidth="40dp"
     android:minHeight="40dp"
     android:previewImage="@drawable/example_appwidget_preview"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="86400000"
-    android:widgetCategory="home_screen" />
+    android:updatePeriodMillis="86400000" />

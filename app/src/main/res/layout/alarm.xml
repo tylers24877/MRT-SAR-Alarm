@@ -2,15 +2,18 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 30/07/20 14:03
+  ~  * Last modified 14/08/20 17:30
   ~  */
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alarm_background"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F44336"
-    android:id="@+id/alarm_background">
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:textSize="50sp"/>
+        android:textSize="50sp" />
 
     <Button
         android:layout_width="wrap_content"

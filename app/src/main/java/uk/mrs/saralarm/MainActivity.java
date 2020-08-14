@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 09/08/20 21:38
+ *  * Last modified 14/08/20 17:30
  *
  */
 
@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -45,18 +47,21 @@ import uk.mrs.saralarm.support.UpdateWorker;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    @RequiresPermission(allOf = {"android.permission.INTERNET", "android.permission.ACCESS_NETWORK_STATE", "android.permission.WAKE_LOCK"})
     @SuppressLint("BatteryLife")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null);
         setContentView(R.layout.activity_main);
+
+
         //get the toolbar from the view by id.
         Toolbar toolbar = findViewById(R.id.ResponseToolbar);
-
         //set the toolbar as actionbar. To support lollipop.
         setSupportActionBar(toolbar);
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -118,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
      * @param item item selected
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
