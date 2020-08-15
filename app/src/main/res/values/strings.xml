@@ -2,7 +2,7 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 14/08/20 17:30
+  ~  * Last modified 15/08/20 13:55
   ~  */
   -->
 
@@ -14,5 +14,6 @@
     <string name="sar_a_seek_bar_low_time">0m</string>
     <string name="sar_l_response_message_hint">Optional: For example, \"On my way.\"</string>
     <string name="response_date_received">Date Received</string>
+    <string name="setup_summery_text">Please allow the app to access incoming SMS messages.\n\nYou\'ll be asked to disable battery optimisation for this app. This is to allow SMS messages to be detected at all times. Don\'t worry, this app is very lightweight and it will not drain your battery.</string>
 
 </resources>

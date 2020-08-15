@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 14/08/20 17:30
+ *  * Last modified 15/08/20 13:09
  *
  */
 
@@ -39,6 +39,11 @@ android {
         }
         debug {
             signingConfig signingConfigs.Main_Signer
+        }
+        releaseAPK {
+            signingConfig signingConfigs.Main_Signer
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
     }
 }

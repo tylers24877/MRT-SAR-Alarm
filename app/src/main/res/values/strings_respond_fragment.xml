@@ -2,7 +2,7 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 14/08/20 17:30
+  ~  * Last modified 15/08/20 00:23
   ~  */
   -->
 
@@ -26,4 +26,5 @@
     <string name="response_unavailable_button">Unavailable</string>
     <string name="response_permission_placeholder">Permission not granted!</string>
     <string name="response_no_messages_placeholder">No messages</string>
+    <string name="SAR_N_dialog_title">Are you sure you\'re unavailable?</string>
 </resources>

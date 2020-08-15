@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 14/08/20 17:30
+ *  * Last modified 15/08/20 11:49
  *
  */
 
@@ -55,7 +55,6 @@ import static java.text.DateFormat.getDateTimeInstance;
 public class RespondFragment extends Fragment {
 
     RespondViewModel respondViewModel;
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,7 +67,7 @@ public class RespondFragment extends Fragment {
                 ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
             //if not granted, request permission.
             requestPermissions(new String[]{
-                    Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                    Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS}, 0);
         }
 
         Button clickButtonSARA = root.findViewById(R.id.respond_sar_a_button);
@@ -179,8 +178,8 @@ public class RespondFragment extends Fragment {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setMessage("Are you sure you're unavailable?").setPositiveButton("I'm sure", dialogClickListener)
-                .setNegativeButton("Take me back", dialogClickListener).show();
+        builder.setMessage(R.string.SAR_N_dialog_title).setPositiveButton(R.string.sar_n_positive, dialogClickListener)
+                .setNegativeButton(R.string.sar_n_negitive, dialogClickListener).show();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -408,7 +407,7 @@ public class RespondFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == MY_PERMISSIONS_REQUEST_READ_CONTACTS) {
+        if (requestCode == 0) {
             for (int i = 0; i < permissions.length; i++) {
                 String permission = permissions[i];
                 int grantResult = grantResults[i];

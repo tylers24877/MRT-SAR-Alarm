@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 14/08/20 17:30
+ *  * Last modified 15/08/20 13:38
  *
  */
 
@@ -53,7 +53,7 @@ public class SMSApp extends BroadcastReceiver {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
 
         //check weather the app is enabled.
-        if (pref.getBoolean("prefEnabled", false)) {
+        if (pref.getBoolean("prefEnabled", true)) {
             //Set<String> activationSet = pref.getStringSet("triggerResponses", null);
             Set<String> activationSet = new HashSet<>();
             activationSet.add("LEEMINGMRT FT");
