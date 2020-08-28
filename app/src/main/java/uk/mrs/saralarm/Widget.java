@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 14/08/20 17:30
+ *  * Last modified 28/08/20 19:41
  *
  */
 
@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
+
+import java.util.Collections;
 
 /**
  * Implementation of App Widget functionality.
@@ -101,9 +103,16 @@ public class Widget extends AppWidgetProvider {
                 Toast toast = Toast.makeText(context, "SARCALL alarm disabled", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
-                pref.edit().putBoolean("prefEnabled", true).apply();
-                Toast toast = Toast.makeText(context, "SARCALL alarm enabled", Toast.LENGTH_SHORT);
-                toast.show();
+                if (!(!pref.getBoolean("prefUsePhoneNumber", false)
+                        && pref.getString("prefUseCustomTrigger", "").isEmpty()
+                        && pref.getStringSet("triggerResponses", Collections.<String>emptySet()).isEmpty())) {
+                    pref.edit().putBoolean("prefEnabled", true).apply();
+                    Toast toast = Toast.makeText(context, "SARCALL alarm enabled", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(context, "Unable to activate alarm. No activation method chosen in app settings.", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
             onUpdate(context);
         }

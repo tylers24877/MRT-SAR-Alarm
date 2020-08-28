@@ -2,7 +2,7 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 15/08/20 11:18
+  ~  * Last modified 28/08/20 10:31
   ~  */
   -->
 
@@ -14,6 +14,7 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorControlActivated">@color/accent</item>
         <item name="colorButtonNormal">@color/primary</item>
+        <item name="colorAccent">@color/accent</item>
         <item name="colorControlHighlight">@color/accent</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:colorBackground">@color/background</item>

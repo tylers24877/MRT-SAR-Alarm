@@ -2,15 +2,13 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 15/08/20 13:59
+ *  * Last modified 28/08/20 19:41
  *
  */
 
 package uk.mrs.saralarm;
 
 import android.annotation.SuppressLint;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -23,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -30,7 +29,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
@@ -40,15 +38,15 @@ import com.github.javiersantos.appupdater.AppUpdater;
 import com.github.javiersantos.appupdater.enums.Display;
 import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import uk.mrs.saralarm.support.UpdateWorker;
 
 public class MainActivity extends AppCompatActivity {
-    private FirebaseAnalytics mFirebaseAnalytics;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @RequiresPermission(allOf = {"android.permission.INTERNET", "android.permission.ACCESS_NETWORK_STATE", "android.permission.WAKE_LOCK"})
     @SuppressLint("BatteryLife")
     @Override
@@ -62,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null);
 
         //get the toolbar from the view by id.
         Toolbar toolbar = findViewById(R.id.ResponseToolbar);
@@ -90,25 +85,44 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        AppUpdater appUpdater = new AppUpdater(this)
-                .setUpdateFrom(UpdateFrom.XML)
-                .setDisplay(Display.DIALOG)
-                .setUpdateXML("https://raw.githubusercontent.com/tylers24877/MRT-SAR-Alarm/master/update.xml")
-                .setCancelable(false);
-        appUpdater.start();
+        if (savedInstanceState == null)
+            if (pref.getBoolean("betaChannel", false))
+                new AppUpdater(this)
+                        .setUpdateFrom(UpdateFrom.XML)
+                        .setDisplay(Display.DIALOG)
+                        .setUpdateXML("https://raw.githubusercontent.com/tylers24877/MRT-SAR-Alarm/master/update_beta.xml")
+                        .setCancelable(false).start();
+            else
+                new AppUpdater(this)
+                        .setUpdateFrom(UpdateFrom.XML)
+                        .setDisplay(Display.DIALOG)
+                        .setUpdateXML("https://raw.githubusercontent.com/tylers24877/MRT-SAR-Alarm/master/update.xml")
+                        .setCancelable(false).start();
 
+        if (savedInstanceState == null) {
 
-        PeriodicWorkRequest updateRequest =
-                new PeriodicWorkRequest.Builder(UpdateWorker.class, 12, TimeUnit.HOURS, 11, TimeUnit.HOURS)
-                        // Constraints
-                        .build();
+            WorkManager.getInstance(this).cancelUniqueWork("SARCALL_CHECK_UPDATE");
+            WorkManager.getInstance(this).cancelUniqueWork("SARCALL_CHECK_UPDATE_V1");
 
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-                "SARCALL_CHECK_UPDATE",
-                ExistingPeriodicWorkPolicy.KEEP,
-                updateRequest);
+            PeriodicWorkRequest updateRequest =
+                    new PeriodicWorkRequest.Builder(UpdateWorker.class, 12, TimeUnit.HOURS, 30, TimeUnit.MINUTES)
+                            // Constraints
+                            .addTag("SARCALL_CHECK_UPDATE_V2_TAG")
+                            .build();
+
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                    "SARCALL_CHECK_UPDATE_V2",
+                    ExistingPeriodicWorkPolicy.KEEP,
+                    updateRequest);
+        }
+
+        if (pref.getBoolean("prefEnabled", false))
+            if (!pref.getBoolean("prefUsePhoneNumber", false)
+                    && pref.getString("prefUseCustomTrigger", "").isEmpty()
+                    && pref.getStringSet("triggerResponses", Collections.<String>emptySet()).isEmpty()) {
+                pref.edit().putBoolean("prefEnabled", false).apply();
+            }
     }
-
     /**
      * Called when menu should be created.
      *
@@ -132,41 +146,9 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * This class is used to update the widget if the settings are changed within the app.
-     */
-    public static class PrefsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.preference, rootKey);
-            getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
         }
-
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            Intent intent = new Intent(getContext(), Widget.class);
-            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            int[] ids = AppWidgetManager.getInstance(getContext()).getAppWidgetIds(new ComponentName(requireContext(), Widget.class));
-            if (ids != null && ids.length > 0) {
-                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-                requireContext().sendBroadcast(intent);
-            }
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-
-        }
-
-        @Override
-        public void onPause() {
-            getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-            super.onPause();
-        }
+        return true;
     }
 }

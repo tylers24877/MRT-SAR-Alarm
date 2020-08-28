@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 15/08/20 13:59
+ *  * Last modified 28/08/20 18:42
  *
  */
 
@@ -103,5 +103,4 @@ public class SetupActivity extends AppCompatActivity {
         finish();
 
     }
-
 }

@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 15/08/20 13:38
+ *  * Last modified 28/08/20 19:41
  *
  */
 
@@ -16,6 +16,8 @@ import android.hardware.display.DisplayManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.provider.Telephony;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsMessage;
 import android.view.Display;
 
@@ -23,9 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
 import androidx.preference.PreferenceManager;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
-
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -35,10 +35,6 @@ import java.util.Set;
  * (c)2014 Tyler Simmonds||All rights reserved.
  */
 public class SMSApp extends BroadcastReceiver {
-
-
-    FirebaseAnalytics mFirebaseAnalytics;
-
     /**
      * Called when a text message is received.
      *
@@ -50,47 +46,101 @@ public class SMSApp extends BroadcastReceiver {
     public void onReceive(@NonNull final Context context, @NonNull Intent intent) {
         //get preferences for application
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
 
         //check weather the app is enabled.
         if (pref.getBoolean("prefEnabled", true)) {
-            //Set<String> activationSet = pref.getStringSet("triggerResponses", null);
-            Set<String> activationSet = new HashSet<>();
-            activationSet.add("LEEMINGMRT FT");
-            activationSet.add("VALLEYMRT FT");
-            activationSet.add("LOSSIEMRT FT");
-
+            Set<String> activationSet = pref.getStringSet("triggerResponses", Collections.<String>emptySet());
             boolean usePhoneNumber = pref.getBoolean("prefUsePhoneNumber", false);
+            String customTrigger = pref.getString("prefUseCustomTrigger", "");
 
-            if (activationSet.isEmpty()) return;
-
-            //get bundle of extras from intent.
-            Bundle bundle = intent.getExtras();
-            //check whether the bundle is not null
-            if (bundle != null) {
-                //if true, get the string of the text message content.
-                final Object[] plusObj = (Object[]) bundle.get("pdus");
-
-                assert plusObj != null;
-                for (Object aPlusObj : plusObj) {
-
-                    //get the current message from Pdu.
-                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) aPlusObj);
-
-                    //work out the body message from the current SMS message
-                    String message = currentMessage.getDisplayMessageBody();
-
-
-                    //if true,
-                    //create a notification alerting that the alarm has sounded.
-                    if (!usePhoneNumber && checkStringSet(activationSet, message))
-                        if (checkScreenState(context)) {
-                            ActivationNotification.notify_postAlarm(context);
-                            mFirebaseAnalytics.logEvent("alarm_screen_on", null);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.getAction())) {
+                    for (SmsMessage smsMessage : Telephony.Sms.Intents.getMessagesFromIntent(intent)) {
+                        if (!usePhoneNumber) {
+                            assert activationSet != null;
+                            if (activationSet.isEmpty()) {
+                                assert customTrigger != null;
+                                if (!customTrigger.isEmpty()) {
+                                    if (smsMessage.getMessageBody().toLowerCase()
+                                            .replaceAll("\\s+", "")
+                                            .startsWith(customTrigger.replaceAll("\\s+", "").toLowerCase())) {
+                                        if (checkScreenState(context)) {
+                                            ActivationNotification.notify_postAlarm(context);
+                                        } else {
+                                            ActivationNotification.notify(context);
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (checkStringSet(activationSet, smsMessage.getMessageBody()))
+                                    if (checkScreenState(context)) {
+                                        ActivationNotification.notify_postAlarm(context);
+                                    } else {
+                                        ActivationNotification.notify(context);
+                                    }
+                            }
                         } else {
-                            ActivationNotification.notify(context);
-                            mFirebaseAnalytics.logEvent("alarm_screen_off", null);
+                            String phonenumber = "07479923541";
+                            if (PhoneNumberUtils.compare(phonenumber, smsMessage.getOriginatingAddress())) {
+                                if (checkScreenState(context)) {
+                                    ActivationNotification.notify_postAlarm(context);
+                                } else {
+                                    ActivationNotification.notify(context);
+                                }
+                            }
                         }
+                    }
+                }
+            } else {
+                //get bundle of extras from intent.
+                Bundle bundle = intent.getExtras();
+                //check whether the bundle is not null
+                if (bundle != null) {
+                    //if true, get the string of the text message content.
+                    final Object[] plusObj = (Object[]) bundle.get("pdus");
+
+                    assert plusObj != null;
+                    for (Object aPlusObj : plusObj) {
+
+                        //get the current message from Pdu.
+                        SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) aPlusObj);
+
+                        if (!usePhoneNumber) {
+                            assert activationSet != null;
+                            if (activationSet.isEmpty()) {
+                                assert customTrigger != null;
+                                if (!customTrigger.isEmpty()) {
+                                    if (smsMessage.getMessageBody().toLowerCase()
+                                            .replaceAll("\\s+", "")
+                                            .startsWith(customTrigger.replaceAll("\\s+", "").toLowerCase())) {
+                                        if (checkScreenState(context)) {
+                                            ActivationNotification.notify_postAlarm(context);
+                                        } else {
+                                            ActivationNotification.notify(context);
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (checkStringSet(activationSet, smsMessage.getMessageBody()))
+                                    if (checkScreenState(context)) {
+                                        ActivationNotification.notify_postAlarm(context);
+                                    } else {
+                                        ActivationNotification.notify(context);
+                                    }
+                            }
+                        } else {
+                            //String phonenumber = "07479923541";
+                            String phonenumber = "07537415551";
+
+                            if (PhoneNumberUtils.compare(phonenumber, smsMessage.getOriginatingAddress())) {
+                                if (checkScreenState(context)) {
+                                    ActivationNotification.notify_postAlarm(context);
+                                } else {
+                                    ActivationNotification.notify(context);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -2,7 +2,7 @@
  * *
  *  * Created by Tyler Simmonds.
  *  * Copyright (c) 2020 . All rights reserved.
- *  * Last modified 14/08/20 17:30
+ *  * Last modified 15/08/20 14:18
  *
  */
 
@@ -26,10 +26,6 @@ import static androidx.core.app.NotificationCompat.PRIORITY_MAX;
 
 
 public class ActivationNotification {
-
-    //Notification unique string
-    @NonNull
-    public static String NOTIFICATION_ACTION_SAR_A = "uk.mrs.saralarm.notification_sar_a";
 
 
     /**

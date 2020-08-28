@@ -2,7 +2,7 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 14/08/20 17:30
+  ~  * Last modified 28/08/20 19:41
   ~  */
   -->
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -58,7 +58,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             app:counterEnabled="true"
-            app:counterMaxLength="75"
+            app:counterMaxLength="135"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/respond_dialog_sar_l_seek_eta_txtview"
             app:layout_constraintTop_toBottomOf="@+id/respond_dialog_sar_l_message_title_txtview">
@@ -71,7 +71,7 @@
                 android:hint="@string/sar_l_response_message_hint"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
-                android:maxLength="75"
+                android:maxLength="135"
                 android:scrollbars="vertical" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,7 +113,7 @@
             app:layout_constraintEnd_toEndOf="@+id/respond_dialog_sar_l_message_inputlayout"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/respond_dialog_sar_l_seek_eta_txtview"
-            app:layout_constraintTop_toBottomOf="@+id/respond_dialog_sar_l_seek" />
+            app:layout_constraintTop_toBottomOf="@+id/sar_l_spinner" />
 
         <TextView
             android:id="@+id/textView4"
@@ -135,5 +135,32 @@
             app:layout_constraintStart_toEndOf="@+id/respond_dialog_sar_l_seek"
             app:layout_constraintTop_toTopOf="@+id/respond_dialog_sar_l_seek" />
 
+
+        <TextView
+            android:id="@+id/respond_dialog_sar_l_pre_message_title_txtview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Predefined Message:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="@+id/respond_dialog_sar_l_message_inputlayout"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/respond_dialog_sar_l_seek_eta_txtview"
+            app:layout_constraintTop_toBottomOf="@+id/respond_dialog_sar_l_seek" />
+
+        <Spinner
+            android:id="@+id/sar_l_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:singleLine="false"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/respond_dialog_sar_l_pre_message_title_txtview" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

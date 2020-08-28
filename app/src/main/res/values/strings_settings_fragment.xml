@@ -2,12 +2,12 @@
   ~ /**
   ~  * Created by Tyler Simmonds.
   ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 08/08/20 19:05
+  ~  * Last modified 28/08/20 19:38
   ~  */
   -->
 
 <resources>
-    <string name="pref_enabled_summary">Enable or disable the SMS alarm</string>
+    <string name="pref_enabled_summary">Enable or disable the SMS alarm.\nThis will NOT enable if none of the activation methods are chosen.</string>
     <string name="pref_enabled_title">SARCALL Alarm Enabled</string>
     <string name="trigger_pref_title">SAR Team</string>
     <string name="triggers_sum">Select your SAR Team</string>
