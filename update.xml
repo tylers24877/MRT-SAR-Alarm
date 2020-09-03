@@ -8,10 +8,13 @@
 
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.4.7</latestVersion>
-    <latestVersionCode>17</latestVersionCode>
+    <latestVersion>1.4.8</latestVersion>
+    <latestVersionCode>18</latestVersionCode>
     <url>
       https://github.com/tylers24877/MRT-SAR-Alarm/wiki/Download-SARCALL-Alarm
     </url>
+    <releaseNotes>
+v1.4-8beta update available. Sorry for a 2nd update over two days. Previous version was flawed, please update to this version asap.
+    </releaseNotes>
   </update>
 </MRT-SAR-Alarm>
