@@ -5,16 +5,21 @@
   ~  * Last modified 09/08/20 00:59
   ~  */
   -->
-
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.4.8</latestVersion>
-    <latestVersionCode>18</latestVersionCode>
+    <latestVersion>1.5.2</latestVersion>
+    <latestVersionCode>24</latestVersionCode>
     <url>
-      https://github.com/tylers24877/MRT-SAR-Alarm/wiki/Download-SARCALL-Alarm
+      http://sarcallapp.com/downloads/SARCALL_Alarm_v1.5.2.apk
     </url>
     <releaseNotes>
-v1.4-8beta update available. Sorry for a 2nd update over two days. Previous version was flawed, please update to this version asap.
+		v1.5.2 update available. 
+		- Now supports multiple trigger phrases and SMS trigger numbers!
+		- Custom alarm sounds can be added per "trigger rule" (Custom colors will be added soon)
+		- SAR A/L/N reply can be sent to multiple numbers.
+		- Received SMS now displays on the alarm screen.
+		- Changed the logic for the phrases from "Startswith" to "Contains".
+		- Other bug fixes related to alarm not activating.
     </releaseNotes>
   </update>
 </MRT-SAR-Alarm>
