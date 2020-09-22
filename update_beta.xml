@@ -3,15 +3,13 @@
     <latestVersion>1.5.4beta</latestVersion>
     <latestVersionCode>20</latestVersionCode>
     <url>
-      http://sarcallapp.com/downloads/SARCALL_Alarm_v1.5.4beta.apk
+      http://sarcallapp.com/downloads/sarcall_alarm/sarcall_download_beta.html
     </url>
     <releaseNotes>
 	v1.5-4beta update available. Changelog:
 	    
 	-Implemented custom colours for the fullscreen alarm. You can set the colours in the rule configurator.
 	-A few bug fixes.
-	    
-	If you get redirected to your browser, but nothing downloads. Please close all your browser tabs and try again.
     </releaseNotes>
   </update>
 </MRT-SAR-Alarm>
