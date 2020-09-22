@@ -7,8 +7,9 @@
     </url>
     <releaseNotes>
 	v1.5-4beta update available. Changelog:
-	    
-	-Implemented custom colours for the fullscreen alarm. You can set the colours in the rule configurator.
+	
+	-Toggle for looping alarm audio added to rules configurator.
+	-Implemented custom colours for the fullscreen alarm. You can set the colours in the rules configurator.
 	-A few bug fixes.
     </releaseNotes>
   </update>
