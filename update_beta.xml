@@ -10,6 +10,8 @@
 	    
 	-Implemented custom colours for the fullscreen alarm. You can set the colours in the rule configurator.
 	-A few bug fixes.
+	    
+	If you get redirected to your browser, but nothing downloads. Please close all your browser tabs and try again.
     </releaseNotes>
   </update>
 </MRT-SAR-Alarm>
