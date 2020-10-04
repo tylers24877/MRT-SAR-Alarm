@@ -1,16 +1,15 @@
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.5.4beta</latestVersion>
-    <latestVersionCode>27</latestVersionCode>
+    <latestVersion>1.5.4</latestVersion>
+    <latestVersionCode>28</latestVersionCode>
     <url>
-      http://sarcallapp.com/downloads/sarcall_alarm/sarcall_download_beta.html
+      http://sarcallapp.com/downloads/sarcall_alarm/sarcall_download.html
     </url>
     <releaseNotes>
-	v1.5-4beta update available. Changelog:
+	v1.5-4 update available. Changelog:
 	
-	-Toggle for looping alarm audio added to rules configurator.
-	-Implemented custom colours for the fullscreen alarm. You can set the colours in the rules configurator.
-	-A few bug fixes.
+	-First stable release!
+	-Many thanks to the beta testers for reporting any issues. Keep up the valuble contibution for the future beta updates!
     </releaseNotes>
   </update>
 </MRT-SAR-Alarm>
