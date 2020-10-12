@@ -1,17 +1,9 @@
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.5.5beta</latestVersion>
-    <latestVersionCode>30</latestVersionCode>
+    <latestVersion>1.5.6</latestVersion>
+    <latestVersionCode>33</latestVersionCode>
     <url>
       http://sarcallapp.com/downloads/sarcall_alarm/sarcall_download_beta.html
     </url>
-    <releaseNotes>
-	v1.5-5beta update available. Changelog:
-	
-	-Implemented a very highly requested feature... the alarm will now activate when the screen is on!
-	-Please make sure you enable the new "Draw on top" permission, by following the popup once installed.
-	    
-	-In this update I've gone with a new approach on how the alarm activates in the backend, so it should be more reliable. Any feedback on this would be welcome!
-    </releaseNotes>
-  </update>
+   </update>
 </MRT-SAR-Alarm>
