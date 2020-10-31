@@ -1,9 +1,16 @@
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.5.6</latestVersion>
-    <latestVersionCode>33</latestVersionCode>
+    <latestVersion>1.5.7beta</latestVersion>
+    <latestVersionCode>35</latestVersionCode>
     <url>
       http://sarcallapp.com/downloads/sarcall_alarm/sarcall_download_beta.html
     </url>
+    <releaseNotes>
+Version 1.5.7 BETA release. Changelog:
+- Added SAR H button
+- Added sign on/off buttons
+- Added the ability to use a pre-installed system ringtone.
+- Fixed a bug which stopped the rules configurator from displaying the most up to date info.
+    </releaseNotes>
    </update>
 </MRT-SAR-Alarm>
