@@ -1,23 +1,15 @@
-<!--
-  ~ /**
-  ~  * Created by Tyler Simmonds.
-  ~  * Copyright (c) 2020 . All rights reserved.
-  ~  * Last modified 09/08/20 00:59
-  ~  */
-  -->
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.5.7</latestVersion>
-    <latestVersionCode>36</latestVersionCode>
+    <latestVersion>1.5.9</latestVersion>
+    <latestVersionCode>43</latestVersionCode>
     <url>
       http://sarcallapp.com/downloads/sarcall_alarm/sarcall_download.html
-    </url>  
+    </url>
     <releaseNotes>
-Version 1.5.7 release. Changelog:
-- Added SAR H button
-- Added sign on/off buttons
-- Added the ability to use a pre-installed system ringtone.
-- Fixed a bug which stopped the rules configurator from displaying the most up to date info.
+Version 1.5.9 release. Changelog:
+- I've fixed the custom sound not applying correctly
+- Removed some bugs which caused the app to crash.
+- Thank you for using the app. Please keep up the reporting of any issues you find!
     </releaseNotes>
-  </update>
+   </update>
 </MRT-SAR-Alarm>
