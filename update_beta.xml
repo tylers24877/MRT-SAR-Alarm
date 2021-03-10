@@ -1,15 +1,15 @@
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.5.9</latestVersion>
-    <latestVersionCode>43</latestVersionCode>
+    <latestVersion>1.6.0.0</latestVersion>
+    <latestVersionCode>47</latestVersionCode>
     <url>
       https://sarcallapp.com/downloads/sarcall_alarm/sarcall_download.html
     </url>
     <releaseNotes>
-Version 1.5.9 release. Changelog:
-- I've fixed the custom sound not applying correctly
-- Removed some bugs which caused the app to crash.
+Version 1.6.0 release. Changelog:
+- Added a silence mode. This will allow you to mute the alarm whilst already on the job. It'll save you from having multiple alarms triggering from lots of SMS messages.
 - Thank you for using the app. Please keep up the reporting of any issues you find!
+If you're stuggling to update the app automaticly, please use this link http://bit.ly/sarcall-alarm
     </releaseNotes>
    </update>
 </MRT-SAR-Alarm>
