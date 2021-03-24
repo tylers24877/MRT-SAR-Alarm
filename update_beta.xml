@@ -1,15 +1,16 @@
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.6.0.0</latestVersion>
-    <latestVersionCode>47</latestVersionCode>
+    <latestVersion>1.6.1.0</latestVersion>
+    <latestVersionCode>125</latestVersionCode>
     <url>
-      https://sarcallapp.com/downloads/sarcall_alarm/sarcall_download.html
+      http://bit.ly/sarcall-android
     </url>
     <releaseNotes>
-Version 1.6.0 release. Changelog:
-- Added a silence mode. This will allow you to mute the alarm whilst already on the job. It'll save you from having multiple alarms triggering from lots of SMS messages.
-- Thank you for using the app. Please keep up the reporting of any issues you find!
-If you're stuggling to update the app automaticly, please use this link http://bit.ly/sarcall-alarm
+Version 1.6.1.0 release. Changelog:
+- Sign on/off now supports multiple team names
+- Added a silence mode. This will allow you to mute the alarm whilst already on the job. It'll save you from having multiple alarms triggering from SMS's about the same job.
+- Settings has moved location. It's now located on the app bar at the top.
+If you're struggling to update the app automaticly, please use this link http://bit.ly/sarcall-alarm
     </releaseNotes>
    </update>
 </MRT-SAR-Alarm>
