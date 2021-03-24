@@ -1,6 +1,7 @@
 <MRT-SAR-Alarm>
   <update>
-    <latestVersionCode>1</latestVersionCode>
+    <latestVersion>1.6.3.0</latestVersion>
+    <latestVersionCode>124</latestVersionCode>
     <url>
       http://bit.ly/sarcall-android
     </url>
