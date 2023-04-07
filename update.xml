@@ -1,7 +1,7 @@
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.6.3</latestVersion>
-    <latestVersionCode>337</latestVersionCode>
+    <latestVersion>1.0.0</latestVersion>
+    <latestVersionCode>100</latestVersionCode>
     <url>
       http://bit.ly/sarcall-alarm
     </url>
