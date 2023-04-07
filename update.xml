@@ -1,17 +1,16 @@
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.6.2</latestVersion>
-    <latestVersionCode>252</latestVersionCode>
+    <latestVersion>1.6.3</latestVersion>
+    <latestVersionCode>337</latestVersionCode>
     <url>
-      http://bit.ly/sarcall-android
+      https://github.com/tylers24877/MRT-SAR-Alarm/blob/master/SARCALL_Alarm.v1.6.3.apk?raw=true
     </url>
     <releaseNotes>
-Version 1.6.2 release. Changelog:
-- It's been a while, but here is latest update!
-- You can now include a message when replying with SAR N.
-- Changes to allow support for Android 12.
+Version 1.6.3 release. Changelog:
+- Changes to allow support for Android 13.
+- Added a default audio file rather than using your default ringtone
+- Hopefully you'll notice some bug fixes
 Once updated, please make sure you open the app.
-If you're struggling to update the app automatically, please use this link http://bit.ly/sarcall-alarm
     </releaseNotes>
    </update>
 </MRT-SAR-Alarm>
