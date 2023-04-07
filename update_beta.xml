@@ -1,12 +1,12 @@
 <MRT-SAR-Alarm>
   <update>
-    <latestVersion>1.6.3</latestVersion>
-    <latestVersionCode>337</latestVersionCode>
+    <latestVersion>1.6.4</latestVersion>
+    <latestVersionCode>352</latestVersionCode>
     <url>
-      bit.ly/sarcall-alarm
+      http://bit.ly/sarcall-alarm
     </url>
     <releaseNotes>
-Version 1.6.3 release. Changelog:
+Version 1.6.4 release. Changelog:
 - Changes to allow support for Android 13.
 - Added a default audio file rather than using your default ringtone
 - Hopefully you'll notice some bug fixes
